@@ -57,6 +57,16 @@ export default async function HomePage() {
             return (
                 <div key={post.id} style={{ marginBottom: '20px', padding: '15px', border: '1px solid #eee' }}>
                     <h3>{post.title}</h3>
+                    {post.categories && Array.isArray(post.categories) && post.categories.length > 0 && (
+                        <div style={{ marginBottom: '10px', fontSize: '0.9em', color: '#666' }}>
+                            Categories: {post.categories.map((cat) => {
+                                if (typeof cat === 'object' && cat !== null && 'title' in cat) {
+                                    return cat.title
+                                }
+                                return 'Unknown'
+                            }).join(', ')}
+                        </div>
+                    )}
                     <p style={{ whiteSpace: 'pre-wrap' }}>{contentText}</p>
                 </div>
             )
